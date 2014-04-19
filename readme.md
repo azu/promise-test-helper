@@ -8,6 +8,39 @@ This library help you avoid promise traps on testing.
 * [Promise Anti-patterns](http://taoofcode.net/promise-anti-patterns/ "Promise Anti-patterns")
 * [Promisesのテスト - Promises Book](http://azu.github.io/promises-book/#_chapter_3_promises "Promises Book") (japanese)
 
+### Trap case:
+
+You expected to `mayBeRejected()` is rejected, but it did resolve.
+
+The result is **always passed**.
+
+```js
+function mayBeRejected(){
+    return Promise.resolve();
+}
+it("is bad pattern", function () {
+    return mayBeRejected().catch(function (error) {
+        assert(error instanceof Error);
+    });
+});
+```
+
+You can write intended test with `promise-test-helper`.
+
+The result is **Fail**.
+
+```js
+var shouldRejected = require("promise-test-helper").shouldRejected;
+function mayBeRejected(){
+    return Promise.resolve();
+}
+it("should be failed", function () {
+    return shouldRejected(mayBeRejected()).catch(function (error) {
+        assert(error instanceof Error);
+    });
+});
+```
+
 ## Installation
 
 ``` sh

@@ -15,6 +15,7 @@ describe("promise-test-helper", function () {
                     assert(value === "value");
                 })
             });
+
         });
         context("when promise is rejected", function () {
             it("should be passed", function () {
@@ -50,6 +51,16 @@ describe("promise-test-helper", function () {
                     assert(value);// expect to rejected?
                 });
             });
+            function mayBeRejected() {
+                return Promise.resolve();
+            }
+            it("case : should be failed", function () {
+                return shouldRejected(mayBeRejected()).catch(function (error) {
+                    assert(error.message === "woo");
+                });
+            });
+
         });
+
     });
 });

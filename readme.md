@@ -126,6 +126,8 @@ describe("Detect bad test pattern", function () {
 ```
 
 
+This library inspired by [domenic/chai-as-promised](https://github.com/domenic/chai-as-promised "domenic/chai-as-promised").
+
 ## Contributing
 
 1. Fork it!

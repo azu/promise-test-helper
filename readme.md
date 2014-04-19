@@ -51,7 +51,7 @@ npm install --save-dev promise-test-helper
 
 This library provide two methods.
 
-```
+``` js
 var shouldFulfilled = require("promise-test-helper").shouldFulfilled;
 var shouldRejected = require("promise-test-helper").shouldRejected;
 // in test code

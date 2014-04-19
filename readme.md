@@ -1,4 +1,4 @@
-# promise-test-helper
+# promise-test-helper [![Build Status](https://travis-ci.org/azu/promise-test-helper.svg)](https://travis-ci.org/azu/promise-test-helper)
 
 `promise-test-helper` is library for promise testing.
 

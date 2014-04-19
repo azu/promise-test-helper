@@ -8,7 +8,7 @@ describe("promise-test-helper", function () {
         this.fulfilledPromise = Promise.resolve("value");
         this.rejectedPromise = Promise.reject(new Error("error"));
     });
-    context("Pass good test", function () {
+    describe("Passing good test", function () {
         context("when promise is fulfilled", function () {
             it("should be passed", function () {
                 return shouldFulfilled(this.fulfilledPromise).then(function (value) {
@@ -24,10 +24,12 @@ describe("promise-test-helper", function () {
             });
         });
     });
+
+    // == Bad test pattern
     describe("Detect bad test pattern", function () {
         context("when argument is not promise", function () {
             it("should be failed", function () {
-                return shouldFulfilled("string");
+                return shouldFulfilled("string");// is not a promise object
             });
         });
         context("when promise is rejected", function () {
@@ -39,7 +41,7 @@ describe("promise-test-helper", function () {
         });
         context("when argument is not promise", function () {
             it("should be failed", function () {
-                return shouldRejected("string");
+                return shouldRejected("string");// is not a promise object
             });
         });
         context("when promise is fulfilled", function () {

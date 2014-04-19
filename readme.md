@@ -10,7 +10,7 @@ This library help you avoid promise traps on testing.
 
 ### Trap case:
 
-You expected to `mayBeRejected()` is rejected, but it did resolve.
+You expected to `mayBeRejected()` is rejected, but it is resolved.
 
 The result is **always passed**.
 

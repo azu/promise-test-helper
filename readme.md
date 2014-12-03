@@ -12,7 +12,7 @@ This library help you avoid promise traps on testing.
 
 You expected to `mayBeRejected()` is rejected, but it is resolved.
 
-The result is **always passed**.
+The result was **always passed**. (Unexpected!)
 
 ```js
 function mayBeRejected(){
@@ -27,7 +27,7 @@ it("is bad pattern", function () {
 
 You can write intended test with `promise-test-helper`.
 
-The result is **Fail**.
+The result was **Fail**.
 
 ```js
 var shouldRejected = require("promise-test-helper").shouldRejected;

@@ -9,11 +9,11 @@ var shouldFulfilled = require("../lib/promise-test-helper").shouldFulfilled;
 var shouldRejected = require("../lib/promise-test-helper").shouldRejected;
 
 var resolvedPromiseValue = "value",
-    rejectedPromiseValue = "error";
+    rejectedPromiseUnwrapValue = "error";
 describe("promise-test-helper", function () {
     beforeEach(function () {
         this.fulfilledPromise = Promise.resolve(resolvedPromiseValue);
-        this.rejectedPromise = Promise.reject(new Error(rejectedPromiseValue));
+        this.rejectedPromise = Promise.reject(new Error(rejectedPromiseUnwrapValue));
     });
     describe("#shouldFulfilled", function () {
         context("when argument is not promise", function () {
@@ -66,13 +66,24 @@ describe("promise-test-helper", function () {
             });
         });
         context("when promise is fulfilled", function () {
-            it("should be failed", function (done) {
+            it("should be failed and show `resolvedPromiseValue`", function (done) {
                 shouldRejected(this.fulfilledPromise).catch(function (error) {
                     done(new Error("shouldRejected(this.fulfilledPromise) should not call catch"))
                 }).catch(function (error) {// expected helper return rejected promise
                     assert(error instanceof Error);
-                    assert.equal(error.message, "Expected promise to be rejected but it was fulfilled");
+                    assert.equal(error.message, "Expected promise to be rejected but it was fulfilled: " + resolvedPromiseValue);
                 }).then(done, done);
+            });
+            context("and promise fulfilled undefined", function () {
+                it("should be failed", function (done) {
+                    shouldRejected(Promise.resolve()).catch(function (error) {
+                        done(new Error("shouldRejected(this.fulfilledPromise) should not call catch"))
+                    }).catch(function (error) {// expected helper return rejected promise
+                        assert(error instanceof Error);
+                        assert.equal(error.message, "Expected promise to be rejected but it was fulfilled");
+                    }).then(done, done);
+                });
+
             });
         });
         context("when promise is rejected", function () {

@@ -6,7 +6,7 @@ This library help you avoid promise traps on testing.
 
 * [Making Change.org — Promises and Error Handling](http://making.change.org/post/69613524472/promises-and-error-handling "Making Change.org — Promises and Error Handling")
 * [Promise Anti-patterns](http://taoofcode.net/promise-anti-patterns/ "Promise Anti-patterns")
-* [Promisesのテスト - Promises Book](http://azu.github.io/promises-book/#_chapter_3_promises "Promises Book") (japanese)
+* [Promisesのテスト - Promises Book](http://azu.github.io/promises-book/#_chapter_3_promises "Promises Book") (Japanese)
 
 ### Trap case:
 
@@ -27,7 +27,7 @@ it("is bad pattern", function () {
 
 You can write intended test with `promise-test-helper`.
 
-The result was **Fail**.
+The result was **Fail**. Yes go as expected!
 
 ```js
 var shouldRejected = require("promise-test-helper").shouldRejected;

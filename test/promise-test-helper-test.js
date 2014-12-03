@@ -7,10 +7,13 @@ var assert = require("assert");
 var Promise = require("ypromise");
 var shouldFulfilled = require("../lib/promise-test-helper").shouldFulfilled;
 var shouldRejected = require("../lib/promise-test-helper").shouldRejected;
+
+var resolvedPromiseValue = "value",
+    rejectedPromiseValue = "error";
 describe("promise-test-helper", function () {
     beforeEach(function () {
-        this.fulfilledPromise = Promise.resolve("value");
-        this.rejectedPromise = Promise.reject(new Error("error"));
+        this.fulfilledPromise = Promise.resolve(resolvedPromiseValue);
+        this.rejectedPromise = Promise.reject(new Error(rejectedPromiseValue));
     });
     describe("#shouldFulfilled", function () {
         context("when argument is not promise", function () {
@@ -20,6 +23,7 @@ describe("promise-test-helper", function () {
                 }, Error);
             });
         });
+        // fulfilledPromise => then
         context("when promise is fulfilled", function () {
             it("should be passed", function () {
                 return shouldFulfilled(this.fulfilledPromise).then(function (value) {
@@ -27,6 +31,7 @@ describe("promise-test-helper", function () {
                 })
             });
         });
+        // rejectedPromise
         context("when promise is rejected", function () {
             it("should be failed", function () {
                 return shouldFulfilled(this.rejectedPromise).then().catch(function (error) {
@@ -34,7 +39,9 @@ describe("promise-test-helper", function () {
                     assert.equal(error.message, "error");
                 });
             });
-            it("should be failed", function () {
+        });
+        context("when use `catch` as method chain", function () {
+            it("should be failed - assert error", function () {
                 return shouldFulfilled(this.rejectedPromise).catch().catch(function (error) {
                     assert(error instanceof Error);
                     assert.equal(error.message, "Expected promise to be fulfilled so you should use `shouldFulfilled(promise).then`");
@@ -50,12 +57,22 @@ describe("promise-test-helper", function () {
                 }, Error);
             });
         });
-        context("when promise is fulfilled", function () {
-            it("should be failed", function () {
+        context("when use `then` as method chain", function () {
+            it("should be failed - assert error", function () {
                 return shouldRejected(this.fulfilledPromise).then().catch(function (error) {
                     assert(error instanceof Error);
                     assert.equal(error.message, "Expected promise to be rejected so you should use `shouldRejected(promise).catch`");
                 })
+            });
+        });
+        context("when promise is fulfilled", function () {
+            it("should be failed", function (done) {
+                shouldRejected(this.fulfilledPromise).catch(function (error) {
+                    done(new Error("shouldRejected(this.fulfilledPromise) should not call catch"))
+                }).catch(function (error) {// expected helper return rejected promise
+                    assert(error instanceof Error);
+                    assert.equal(error.message, "Expected promise to be rejected but it was fulfilled");
+                }).then(done, done);
             });
         });
         context("when promise is rejected", function () {

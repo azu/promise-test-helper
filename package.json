@@ -6,7 +6,7 @@
     "promises",
     "testing"
   ],
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/azu/promise-test-helper/",
   "repository": {
     "url": "git://github.com/azu/promise-test-helper.git"

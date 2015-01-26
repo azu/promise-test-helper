@@ -47,7 +47,7 @@ describe("promise-test-helper", function () {
             });
         });
         context("when use `catch` as method chain", function () {
-            it("should be failed - undefined is not function", function () {
+            it("should be failed - has no method 'then'", function () {
                 assert.throws(function () {
                     shouldFulfilled(rejectedPromise).catch(function () {
                     });
@@ -65,7 +65,7 @@ describe("promise-test-helper", function () {
             });
         });
         context("when use `then` as method chain", function () {
-            it("should be failed - undefined is not method", function () {
+            it("should be failed - has no method 'then'", function () {
                 assert.throws(function () {
                     shouldRejected(fulfilledPromise).then(function () {
                         assert(true);

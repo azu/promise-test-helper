@@ -3,8 +3,8 @@
  * LICENSE : MIT
  */
 "use strict";
+require('es6-promise').polyfill();
 var assert = require("assert");
-var Promise = require("ypromise");
 var shouldFulfilled = require("../lib/promise-test-helper").shouldFulfilled;
 var shouldRejected = require("../lib/promise-test-helper").shouldRejected;
 

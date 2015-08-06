@@ -24,7 +24,7 @@
     "url": "https://github.com/azu/promise-test-helper/issues"
   },
   "devDependencies": {
-    "mocha": "^2.0.1",
-    "ypromise": "^0.2.3"
+    "es6-promise": "^2.3.0",
+    "mocha": "^2.0.1"
   }
 }

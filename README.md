@@ -47,7 +47,7 @@ it("should be failed", function () {
 npm install --save-dev promise-test-helper
 ```
 
-I'd recommend use with [Mocha](http://visionmedia.github.io/mocha/ "Mocha") or [Buster.JS](http://docs.busterjs.org/en/latest/ "Buster.JS") - support promise testing.
+I'd recommend use with [Mocha](http://mochajs.org/ "Mocha") or [Buster.JS](http://docs.busterjs.org/en/latest/ "Buster.JS") - support promise testing.
 
 
 ## Usage
